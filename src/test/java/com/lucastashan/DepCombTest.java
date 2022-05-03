@@ -19,6 +19,14 @@ public class DepCombTest {
     depComb = new DepComb(10, 10000, 1250, 1250);
     assertEquals( DepComb.SITUACAO.EMERGENCIA , depComb.getSituacao() );
   }
+
+  @Test
+  public void testeContrutorIllegalArgument(){
+    Exception exception = new DepComb(10, 10000, 0, 1250);
+    
+    String expectedMessage = "Parâmetros inválidos.";
+    String actualMessage = exception.g
+  }
   
   @BeforeEach
   void setUp(){
