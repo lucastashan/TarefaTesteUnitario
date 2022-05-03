@@ -24,8 +24,6 @@ public class DepCombTest {
   void setUp(){
     depComb = new DepComb(0,0,0,0);
   }
-
-
   
   //TESTE DE PARTICAO E VALOR LIMITE PARA OS METODOS DE RECEBER COMB
   //Testes parametrizados de abastecimento com os tanques vazios
@@ -152,8 +150,8 @@ public class DepCombTest {
   @CsvSource( delimiter = ';', value =
     {
       "10000; [500, 7000, 1250, 1250]",
-      "-10;   [-1, 0, 0, 0]",
-      "13000; [-3, 0, 0, 0]"
+      "-10;   [-7, 0, 0, 0]",
+      "13000; [-21, 0, 0, 0]"
     }
   )
   public void encomendaCombustivelNormal(int qtd, String res){
@@ -169,11 +167,11 @@ public class DepCombTest {
   @CsvSource( delimiter = ';', value =
     {
       "6000; COMUM; [150, 2100, 375, 375]",       //POSTO COMUM
-      "12001; COMUM; [-3, 0, 0, 0]",
-      "-1; COMUM; [-1, 0, 0, 0]",
+      "12001; COMUM; [-21, 0, 0, 0]",
+      "-1; COMUM; [-7, 0, 0, 0]",
       "6000; ESTRATEGICO; [300, 4200, 750, 750]", //POSTO ESTRATEGICO
-      "6001; ESTRATEGICO; [-3, 0, 0, 0]",
-      "-1; ESTRATEGICO; [-1, 0, 0, 0]"
+      "6001; ESTRATEGICO; [-21, 0, 0, 0]",
+      "-1; ESTRATEGICO; [-7, 0, 0, 0]"
     }
   )
   public void encomendaCombustivelSobraviso(int qtd, String posto,String res){
@@ -188,15 +186,15 @@ public class DepCombTest {
   @ParameterizedTest
   @CsvSource( delimiter = ';', value =
     {
-      "1000; COMUM; [-2, 0, 0, 0]",
+      "1000; COMUM; [-14, 0, 0, 0]",
       "1000; ESTRATEGICO; [50, 700, 125, 125]",
-      "2000; ESTRATEGICO; [50, 1400, 250, 250]",
-      "3500; ESTRATEGICO; [-3, 0, 0, 0]",
-      "-5;   ESTRATEGICO; [-1, 0, 0, 0]"
+      "2000; ESTRATEGICO; [100, 1400, 250, 250]",
+      "3500; ESTRATEGICO; [-21, 0, 0, 0]",
+      "-5;   ESTRATEGICO; [-7, 0, 0, 0]"
     }
   )
   public void encomendaCombustivelEmergencia(int qtd, String posto, String res){
-    depComb.recebeAditivo(50);
+    depComb.recebeAditivo(100);
     depComb.recebeAlcool(750);
     depComb.recebeGasolina(2100);
     depComb.defineSituacao();

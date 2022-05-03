@@ -99,7 +99,7 @@ public class DepComb {
   }
 
   public int[] encomendaCombustivel(int qtdade, TIPOPOSTO tipoPosto) {
-    if(qtdade < 0) return new int[] {-1,0,0,0};
+    if(qtdade < 0) return new int[] {-7,0,0,0};
 
     double gasolina = qtdade * 0.7;
     double aditivo = qtdade * 0.05;
@@ -114,7 +114,7 @@ public class DepComb {
         tAlcool1-= alcool1;
         tAlcool2-= alcool2;
         return new int[] {(int)aditivo, (int)gasolina, (int)alcool1, (int)alcool2};
-      } else return new int[] {-3,0,0,0};
+      } else return new int[] {-21,0,0,0};
     }
 
     if(getSituacao() == SITUACAO.SOBRAVISO){
@@ -126,25 +126,19 @@ public class DepComb {
           tAlcool2-= (alcool2/2);
           return new int[] {(int)(aditivo/2), (int)(gasolina/2), (int)(alcool1/2), (int)(alcool2/2)};
         }
-      } else return new int[] {-3,0,0,0};
+      } else return new int[] {-21,0,0,0};
     }
 
-    if(tipoPosto == TIPOPOSTO.COMUM) return new int[] {-2,0,0,0};
+    if(tipoPosto == TIPOPOSTO.COMUM) return new int[] {-14,0,0,0};
 
-    if( tGasolina >= gasolina && tAlcool1 >= alcool1 && tAlcool2 >= alcool2 ){
+    if( tGasolina >= gasolina && tAditivo >= aditivo && tAlcool1 >= alcool1 && tAlcool2 >= alcool2 ){
       tGasolina-= gasolina;
+      tAditivo-= aditivo;
       tAlcool1-= alcool1;
       tAlcool2-= alcool2;
-      if(tAditivo < aditivo){
-        int aux = tAditivo;
-        tAditivo = 0;
-        return new int[] {aux,(int)gasolina,(int)alcool1,(int)alcool2};
-      } else {
-        tAditivo-= aditivo;
-        return new int[] {(int)aditivo,(int)gasolina,(int)alcool1,(int)alcool2};
-      }
+      return new int[] {(int)aditivo,(int)gasolina,(int)alcool1,(int)alcool2};
     }
     
-    return new int[] {-3,0,0,0};
+    return new int[] {-21,0,0,0};
   }
 }
