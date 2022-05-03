@@ -1,7 +1,7 @@
 ## TarefaTesteUnitario
 # Geração de Casos de Teste para Teste de 
 
-#Enunciado do problema
+Enunciado do problema
 Em uma diminuta ilha tropical a gasolina vendida nos postos é resultado de uma mistura de 3 componentes: 5% de aditivo, 25% de álcool e 70% de gasolina pura. A preparação do produto é feita por encomenda dos postos em um único centro de distribuição. Esse centro possui estoques adequados ao número de veículos da ilha. A figura 1 apresenta os tanques disponíveis nesse centro.
 
 Existem dois tipos de postos na ilha. Os postos COMUNS, que atendem a população em geral e os postos ESTRATEGICOS que atendem apenas ambulâncias e veículos da polícia. 
