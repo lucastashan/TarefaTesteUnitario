@@ -15,9 +15,11 @@ public class DepComb {
   private int tAlcool2;
   private SITUACAO situacao;
 
-  public DepComb(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) { 
+  public DepComb(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) throws IllegalArgumentException{
+    if( tAditivo < 0 || tGasolina < 0 || tAlcool1 < 0 || tAlcool2 < 0 || tAlcool1 != tAlcool2 )
+      throw new IllegalArgumentException("ILLEGAL_ARGUMENT_EXCEPTION");
     if(tAditivo > MAX_ADITIVO) this.tAditivo = MAX_ADITIVO;
-    else this.tAditivo = tAditivo;
+      else this.tAditivo = tAditivo;
 
     if(tGasolina > MAX_GASOLINA) this.tGasolina = MAX_GASOLINA;
     else this.tGasolina = tGasolina;

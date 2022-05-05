@@ -19,6 +19,18 @@ public class DepCombTest {
     depComb = new DepComb(10, 10000, 1250, 1250);
     assertEquals( DepComb.SITUACAO.EMERGENCIA , depComb.getSituacao() );
   }
+
+  @Test
+  public void testeContrutorIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      new DepComb(10, 10000, 0, 1250);
+    });
+      
+    String expectedMessage = "ILLEGAL_ARGUMENT_EXCEPTION";
+    String actualMessage = exception.getMessage();
+
+    Assertions.assertEquals(expectedMessage, actualMessage);
+  }
   
   @BeforeEach
   void setUp(){
