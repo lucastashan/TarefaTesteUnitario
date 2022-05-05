@@ -24,8 +24,10 @@ public class CentroDistribuicaoTest {
   public void testeContrutorIllegalArgument(){
     Exception exception = new CentroDistribuicao(10, 10000, 0, 1250);
     
-    String expectedMessage = "Parâmetros inválidos.";
-    String actualMessage = exception.g
+    String expectedMessage = "ILLEGAL_ARGUMENT_EXCEPTION";
+    String actualMessage = exception.getMessage();
+
+    Assertions.assertEquals(expectedMessage, actualMessage);
   }
   
   @BeforeEach
