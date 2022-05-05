@@ -1,6 +1,6 @@
 package com.lucastashan;
 
-public class DepComb {
+public class CentroDistribuicao {
   public enum SITUACAO { NORMAL, SOBRAVISO, EMERGENCIA }
   public enum TIPOPOSTO { COMUM, ESTRATEGICO }
 
@@ -15,7 +15,7 @@ public class DepComb {
   private int tAlcool2;
   private SITUACAO situacao;
 
-  public DepComb(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) throws ILLEGAL_ARGUMENT_EXCEPTION{ 
+  public CentroDistribuicao(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) throws ILLEGAL_ARGUMENT_EXCEPTION{ 
     if( tAditivo < 0 || tGasolina < 0 || tAlcool1 < 0 || tAlcool2 < 0 || tAlcool1 != tAlcool2 ) 
       throw new ILLEGAL_ARGUMENT_EXCEPTION("Parâmetros inválidos.");
     if(tAditivo > MAX_ADITIVO) this.tAditivo = MAX_ADITIVO;
