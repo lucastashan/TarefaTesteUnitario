@@ -11,19 +11,21 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CentroDistribuicaoTest {
-  private CentroDistribuicao CentroDistribuicao = null;
+  private CentroDistribuicao centroDistribuicao = null;
 
 
   @Test
   public void testeContrutor(){
-    CentroDistribuicao = new CentroDistribuicao(10, 10000, 1250, 1250);
-    assertEquals( CentroDistribuicao.SITUACAO.EMERGENCIA , CentroDistribuicao.getSituacao() );
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(10, 10000, 1250, 1250);
+    assertEquals( CentroDistribuicao.SITUACAO.EMERGENCIA , centroDistribuicao.getSituacao() );
   }
 
   @Test
-  public void testeContrutorIllegalArgument(){
-    Exception exception = new CentroDistribuicao(10, 10000, 0, 1250);
-    
+  public void testeContrutorIllegalArgumentException() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      new CentroDistribuicao(10, 10000, 0, 1250);
+    });
+      
     String expectedMessage = "ILLEGAL_ARGUMENT_EXCEPTION";
     String actualMessage = exception.getMessage();
 
@@ -32,7 +34,7 @@ public class CentroDistribuicaoTest {
   
   @BeforeEach
   void setUp(){
-    CentroDistribuicao = new CentroDistribuicao(0,0,0,0);
+    centroDistribuicao = new CentroDistribuicao(0,0,0,0);
   }
   
   //TESTE DE PARTICAO E VALOR LIMITE PARA OS METODOS DE RECEBER COMB
@@ -47,10 +49,10 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeAditivoTanqVazio(int param, int resEsp){
-    assertEquals( resEsp , CentroDistribuicao.recebeAditivo(param) );
+    assertEquals( resEsp , centroDistribuicao.recebeAditivo(param) );
   }
 
-  //Teste de particionamento e valor limite do metodo que abastece o tanque de gasolina vazio
+  // Teste de particionamento e valor limite do metodo que abastece o tanque de gasolina vazio
   @ParameterizedTest
   @CsvSource(
     {
@@ -60,7 +62,7 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeGasolinaTanqVazio(int param, int resEsp){
-    assertEquals( resEsp , CentroDistribuicao.recebeGasolina(param) );
+    assertEquals( resEsp , centroDistribuicao.recebeGasolina(param) );
   }
 
   //Teste de particionamento e valor limite do metodo que abastece os tanques de alcool vazios
@@ -73,7 +75,7 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeAlcoolTanqVazio(int param, int resEsp){
-    assertEquals( resEsp , CentroDistribuicao.recebeAlcool(param) );
+    assertEquals( resEsp , centroDistribuicao.recebeAlcool(param) );
   }
 
   //Testes parametrizados com os tanques parcialmente cheios
@@ -87,8 +89,8 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeAditivoTanqParcialmenteCheio(int param, int resEsp){
-    CentroDistribuicao.recebeAditivo(100);
-    assertEquals( resEsp , CentroDistribuicao.recebeAditivo(param) );
+    centroDistribuicao.recebeAditivo(100);
+    assertEquals( resEsp , centroDistribuicao.recebeAditivo(param) );
   }
 
   //Teste de particionamento e valor limite do metodo que abastece o tanque de gasolina parcialmente cheio
@@ -101,8 +103,8 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeGasolinaTanqParcialmenteCheio(int param, int resEsp){
-    CentroDistribuicao.recebeGasolina(1000);
-    assertEquals( resEsp , CentroDistribuicao.recebeGasolina(param) );
+    centroDistribuicao.recebeGasolina(1000);
+    assertEquals( resEsp , centroDistribuicao.recebeGasolina(param) );
   }
 
   //Teste de particionamento e valor limite do metodo que abastece os tanques de alcool parcialmente cheios
@@ -115,43 +117,43 @@ public class CentroDistribuicaoTest {
     }
   )
   public void recebeAlcoolTanqParcialmenteCheio(int param, int resEsp){
-    CentroDistribuicao.recebeAlcool(500);
-    assertEquals( resEsp , CentroDistribuicao.recebeAlcool(param) );
+    centroDistribuicao.recebeAlcool(500);
+    assertEquals( resEsp , centroDistribuicao.recebeAlcool(param) );
   }
 
   //Testes com os tanques cheios
   @Test
   public void recebeAditivoTanqCheio(){
-    CentroDistribuicao.recebeAditivo(500);
-    assertEquals( 0 , CentroDistribuicao.recebeAditivo(100) );
+    centroDistribuicao.recebeAditivo(500);
+    assertEquals( 0 , centroDistribuicao.recebeAditivo(100) );
   }
 
   @Test
   public void recebeGasolinaTanqCheio(){
-    CentroDistribuicao.recebeGasolina(10000);
-    assertEquals( 0 , CentroDistribuicao.recebeGasolina(100) );
+    centroDistribuicao.recebeGasolina(10000);
+    assertEquals( 0 , centroDistribuicao.recebeGasolina(100) );
   }
 
   @Test
   public void recebeAlcoolTanqCheio(){
-    CentroDistribuicao.recebeAlcool(2500);
-    assertEquals( 0 , CentroDistribuicao.recebeAlcool(100) );
+    centroDistribuicao.recebeAlcool(2500);
+    assertEquals( 0 , centroDistribuicao.recebeAlcool(100) );
   }
 
   //Teste com valores inválidos
   @Test
   public void recebeValorInvalidoAditivo(){
-    assertEquals( -1 , CentroDistribuicao.recebeAditivo(-10) );
+    assertEquals( -1 , centroDistribuicao.recebeAditivo(-10) );
   }
 
   @Test
   public void recebeValorInvalidoGasolina(){
-    assertEquals( -1 , CentroDistribuicao.recebeAditivo(-10) );
+    assertEquals( -1 , centroDistribuicao.recebeAditivo(-10) );
   }
 
   @Test
   public void recebeValorInvalidoAlcool(){
-    assertEquals( -1 , CentroDistribuicao.recebeAlcool(-10) );
+    assertEquals( -1 , centroDistribuicao.recebeAlcool(-10) );
   }
 
   //TESTE DA FUNCAO DE ENCOMENDA DE COMBUSTIVEL
@@ -165,11 +167,11 @@ public class CentroDistribuicaoTest {
     }
   )
   public void encomendaCombustivelNormal(int qtd, String res){
-    CentroDistribuicao.recebeAditivo(500);
-    CentroDistribuicao.recebeAlcool(2500);
-    CentroDistribuicao.recebeGasolina(10000);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( res , Arrays.toString(CentroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM)) );
+    centroDistribuicao.recebeAditivo(500);
+    centroDistribuicao.recebeAlcool(2500);
+    centroDistribuicao.recebeGasolina(10000);
+    centroDistribuicao.defineSituacao();
+    assertEquals( res , Arrays.toString(centroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM)) );
   }
 
   //Testes de partição e valor limite das encomendas no estado SOBRAVISO 
@@ -185,11 +187,11 @@ public class CentroDistribuicaoTest {
     }
   )
   public void encomendaCombustivelSobraviso(int qtd, String posto,String res){
-    CentroDistribuicao.recebeAditivo(300);
-    CentroDistribuicao.recebeAlcool(1500);
-    CentroDistribuicao.recebeGasolina(4200);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( res , Arrays.toString( CentroDistribuicao.encomendaCombustivel(qtd, Enum.valueOf(CentroDistribuicao.TIPOPOSTO.class , posto)) ) ) ;
+    centroDistribuicao.recebeAditivo(300);
+    centroDistribuicao.recebeAlcool(1500);
+    centroDistribuicao.recebeGasolina(4200);
+    centroDistribuicao.defineSituacao();
+    assertEquals( res , Arrays.toString( centroDistribuicao.encomendaCombustivel(qtd, Enum.valueOf(CentroDistribuicao.TIPOPOSTO.class , posto)) ) ) ;
   }
 
   //Teste de partição e valor limite das encomendas no estado EMERGENCIA
@@ -204,11 +206,11 @@ public class CentroDistribuicaoTest {
     }
   )
   public void encomendaCombustivelEmergencia(int qtd, String posto, String res){
-    CentroDistribuicao.recebeAditivo(100);
-    CentroDistribuicao.recebeAlcool(750);
-    CentroDistribuicao.recebeGasolina(2100);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( res , Arrays.toString( CentroDistribuicao.encomendaCombustivel(qtd, Enum.valueOf(CentroDistribuicao.TIPOPOSTO.class , posto)) ) );
+    centroDistribuicao.recebeAditivo(100);
+    centroDistribuicao.recebeAlcool(750);
+    centroDistribuicao.recebeGasolina(2100);
+    centroDistribuicao.defineSituacao();
+    assertEquals( res , Arrays.toString( centroDistribuicao.encomendaCombustivel(qtd, Enum.valueOf(CentroDistribuicao.TIPOPOSTO.class , posto)) ) );
   }
 
   //TESTE DE ESTADOS
@@ -225,13 +227,13 @@ public class CentroDistribuicaoTest {
     }
   )
   public void situacaoNormal(int qtd, String situacao){
-    CentroDistribuicao.recebeAditivo(500);
-    CentroDistribuicao.recebeAlcool(2500);
-    CentroDistribuicao.recebeGasolina(7000);     //COMBUSTIVEL = 10.000
-    CentroDistribuicao.defineSituacao();
-    CentroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , CentroDistribuicao.getSituacao() );
+    centroDistribuicao.recebeAditivo(500);
+    centroDistribuicao.recebeAlcool(2500);
+    centroDistribuicao.recebeGasolina(7000);     //COMBUSTIVEL = 10.000
+    centroDistribuicao.defineSituacao();
+    centroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM);
+    centroDistribuicao.defineSituacao();
+    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , centroDistribuicao.getSituacao() );
   }
 
   //Estado SOBREAVISO => SOBREAVISO
@@ -244,27 +246,27 @@ public class CentroDistribuicaoTest {
     }
   )
   public void situacaoSobraviso(int qtd, String situacao){
-    CentroDistribuicao.recebeAditivo(200);
-    CentroDistribuicao.recebeAlcool(1000);
-    CentroDistribuicao.recebeGasolina(4000);      
-    CentroDistribuicao.defineSituacao();
-    CentroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , CentroDistribuicao.getSituacao() );
+    centroDistribuicao.recebeAditivo(200);
+    centroDistribuicao.recebeAlcool(1000);
+    centroDistribuicao.recebeGasolina(4000);      
+    centroDistribuicao.defineSituacao();
+    centroDistribuicao.encomendaCombustivel(qtd, CentroDistribuicao.TIPOPOSTO.COMUM);
+    centroDistribuicao.defineSituacao();
+    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , centroDistribuicao.getSituacao() );
   }
 
   //Estado SOBREAVISO => NORMAL
   @Test
   public void situacaoSobreavisoNormal(){
-    CentroDistribuicao.recebeAditivo(200);
-    CentroDistribuicao.recebeAlcool(1000);
-    CentroDistribuicao.recebeGasolina(4000);
-    CentroDistribuicao.defineSituacao();
-    CentroDistribuicao.recebeAditivo(100);
-    CentroDistribuicao.recebeAlcool(1000);
-    CentroDistribuicao.recebeGasolina(2000);
-    CentroDistribuicao.defineSituacao();
-    assertEquals( CentroDistribuicao.SITUACAO.NORMAL , CentroDistribuicao.getSituacao() );
+    centroDistribuicao.recebeAditivo(200);
+    centroDistribuicao.recebeAlcool(1000);
+    centroDistribuicao.recebeGasolina(4000);
+    centroDistribuicao.defineSituacao();
+    centroDistribuicao.recebeAditivo(100);
+    centroDistribuicao.recebeAlcool(1000);
+    centroDistribuicao.recebeGasolina(2000);
+    centroDistribuicao.defineSituacao();
+    assertEquals( CentroDistribuicao.SITUACAO.NORMAL , centroDistribuicao.getSituacao() );
   }
 
   //Estado  EMERGENCIA => EMERGENCIA
@@ -279,15 +281,15 @@ public class CentroDistribuicaoTest {
     }
   )
   public void situacaoEmergencia(int aditivo, int alcool, int gasolina, String situacao){
-    CentroDistribuicao.recebeAditivo(50);
-    CentroDistribuicao.recebeAlcool(300);
-    CentroDistribuicao.recebeGasolina(1000);      
-    CentroDistribuicao.defineSituacao();
-    assertEquals( CentroDistribuicao.SITUACAO.EMERGENCIA , CentroDistribuicao.getSituacao() );
-    CentroDistribuicao.recebeAditivo(aditivo);
-    CentroDistribuicao.recebeAlcool(alcool);
-    CentroDistribuicao.recebeGasolina(gasolina);      
-    CentroDistribuicao.defineSituacao();
-    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , CentroDistribuicao.getSituacao() );
+    centroDistribuicao.recebeAditivo(50);
+    centroDistribuicao.recebeAlcool(300);
+    centroDistribuicao.recebeGasolina(1000);      
+    centroDistribuicao.defineSituacao();
+    assertEquals( CentroDistribuicao.SITUACAO.EMERGENCIA , centroDistribuicao.getSituacao() );
+    centroDistribuicao.recebeAditivo(aditivo);
+    centroDistribuicao.recebeAlcool(alcool);
+    centroDistribuicao.recebeGasolina(gasolina);      
+    centroDistribuicao.defineSituacao();
+    assertEquals( Enum.valueOf(CentroDistribuicao.SITUACAO.class, situacao) , centroDistribuicao.getSituacao() );
   }
 }
